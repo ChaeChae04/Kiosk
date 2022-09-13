@@ -2,7 +2,7 @@ package edu.sungil.foods.web.domain.dto;
 
 import lombok.Data;
 
-@Data
+@Data // 클래스 정의
 public class UserInfo {
 	  Long userNo;
 	  String userNm;
