@@ -104,7 +104,7 @@
 											<td class="desc">닭갈비와 떡볶이의 오묘한 조화</td>
 											<td>100</td>
 											<td>전시</td>
-										</tr>
+										</tr>        
 										<tr class="spacer"></tr>
 									</tbody>
 								</table>
@@ -129,14 +129,13 @@
 						</div>
 						<div class="modal-body">
 							<div class="card-body card-block">
-								<form action="" method="post" enctype="multipart/form-data"
-									class="form-horizontal">
+								<form id="frmMenu" method="post" class="form-horizontal">
 									<div class="row form-group">
 										<div class="col col-md-3">
 											<label class=" form-control-label">메뉴번호</label>
 										</div>
 										<div class="col-12 col-md-9">
-											<p class="form-control-static" id="menuNm" name="menuNm">1</p>
+											<p class="form-control-static" id="MENU_NO" name="MENU_NO">1</p>
 										</div>
 									</div>
 									<div class="row form-group">
@@ -144,7 +143,7 @@
 											<label for="menuNm" class=" form-control-label">메뉴 명</label>
 										</div>
 										<div class="col-12 col-md-9">
-											<input type="text" id="menuNm" name="menuNm"
+											<input type="text" id="MENU_NM" name="MENU_NM"
 												placeholder="메뉴 명" class="form-control"> <small
 												class="form-text text-muted"></small>
 										</div>
@@ -154,7 +153,7 @@
 											<label for="price" class=" form-control-label">단가</label>
 										</div>
 										<div class="col-3 col-md-3">
-											<input type="number" id="price" name="price" placeholder="단가"
+											<input type="number" id="MENU_PRC" name="MENU_PRC" placeholder="단가"
 												class="form-control"> <small
 												class="help-block form-text"></small>
 										</div>
@@ -165,7 +164,7 @@
 												설명</label>
 										</div>
 										<div class="col-12 col-md-9">
-											<textarea name="menuDesc" id="menuDesc" rows="3"
+											<textarea name="MENU_DESC" id="MENU_DESC" rows="3"
 												placeholder="메뉴 설명..." class="form-control"></textarea>
 											<small class="help-block form-text"></small>
 										</div>
@@ -176,7 +175,7 @@
 												재고</label>
 										</div>
 										<div class="col-3 col-md-3">
-											<input type="number" id="menuStock" name="menuStock"
+											<input type="number" id="MENU_STOCK_QTY" name="MENU_STOCK_QTY"
 												placeholder="재고" class="form-control">
 										</div>
 									</div>
@@ -185,17 +184,16 @@
 											<label for="textarea-input" class=" form-control-label">전시여부</label>
 										</div>
 										<div class="col-12 col-md-9">
-											<input type="checkbox" checked data-toggle="toggle"
-												data-size="lg">
+											<label><input type="radio" name="menuDispYn" value="Y" checked>전시</label>
+											<label><input type="radio" name="menuDispYn" value="N">비전시</label>
 										</div>
 									</div>
 									<div class="row form-group">
 										<div class="col col-md-3">
-											<label for="file-input" class=" form-control-label">메뉴
-												이미지</label>
+											<label for="file-input" class=" form-control-label">메뉴 이미지</label>
 										</div>
 										<div class="col-12 col-md-9">
-											<input type="file" id="file-input" name="file-input"
+											<input type="file" id="MANU_IMG_NM" name="MANU_IMG_NM"
 												class="form-control-file">
 										</div>
 									</div>
@@ -205,7 +203,7 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-dismiss="modal">취소</button>
-							<button type="button" class="btn btn-primary">저장</button>
+							<button type="button" id="butt_save" class="btn btn-primary">저장</button>
 						</div>
 					</div>
 				</div>
@@ -215,4 +213,9 @@
 			<%@ include file="/WEB-INF/jsp/admin/include/footer.jsp"%>
 		</div>
 </body>
+<script>
+	$("#butt_save").click(function(){
+		alert("저장됐습니다.");
+	});
+</script>
 </html>

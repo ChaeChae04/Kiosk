@@ -18,7 +18,7 @@ public class MainDBConfig {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Bean
 	@ConfigurationProperties(prefix = "spring.datasource")
-	public HikariConfig hikariConfig() {
+	public HikariConfig hikariConfig() { // db connection을 효율적으로 관리해줌
 		return new HikariConfig();
 	}
 
