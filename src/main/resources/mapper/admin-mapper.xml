@@ -3,12 +3,12 @@
  
 <mapper namespace="edu.sungil.foods.web.domain.AdminMapper">
     <insert id="insertMenu" parameterType="edu.sungil.foods.web.domain.dto.MenuInfo">
-       	insert into TB_MENU 
+       	insert into TB_MENU
        	(	MENU_NM, 
        		MENU_PRC, 
        		MENU_DESC,
        		MENU_STOCK_QTY, 
-       		DISP_YN, 
+       		MENU_DISP_YN, 
        		MANU_IMG_NM) values 
        		(
        			#{menuNm},
@@ -19,6 +19,22 @@
        			#{fileNm}
        		)
     </insert>
-
-  
+	
+	<select id="selectMenuList" resultType="edu.sungil.foods.web.domain.dto.MenuInfo" parameterType="edu.sungil.foods.web.domain.dto.SchMenuInfo">
+		SELECT MENU_NO, 
+			   MENU_NM, 
+	       	   MENU_PRC, 
+	       	   MENU_DESC,
+	       	   MENU_STOCK_QTY, 
+	       	   MENU_DISP_YN
+	    FROM TB_MENU
+	    WHERE 1=1
+	    <if test="menuNo !='' and menuNo !=null">
+	    	and menu_no = #{menuNo}
+	    </if>
+	     <if test="menuNm !='' and menuNm !=null">
+	    	and menu_no like CONCAT('%', #{menuNm} ,'%')
+	    </if>
+	    
+	</select>
 </mapper> 
