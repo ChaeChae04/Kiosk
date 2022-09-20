@@ -69,8 +69,8 @@
 							<h3 class="title-5 m-b-35">메뉴목록</h3>
 							<div class="table-data__tool">
 								<div class="table-data__tool-left">
-									<input type="text" placeholder="메뉴번호" class="au-btn-filter">
-									<input type="text" placeholder="메뉴명" class="au-btn-filter">
+									<input id="schMenuNo" type="text" placeholder="메뉴번호" class="au-btn-filter">
+									<input id="schMenuNm" type="text" placeholder="메뉴명" class="au-btn-filter">
 								</div>
 								<div class="table-data__tool-right">
 									<button class="au-btn au-btn-icon au-btn--green au-btn--small"
@@ -86,20 +86,19 @@
 								<table id="tblMenu" class="table table-data2">
 									<thead>
 										<tr>
-											<th>메뉴번호</th>
-											<th>메뉴명</th>
-											<th>단가</th>
-											<th>메뉴설명</th>
-											<th>메뉴재고</th>
-											<th>전시여부</th>
-											<th></th>
+											<th data-field="menuNo">메뉴번호</th>
+											<th data-field="menuNm">메뉴명</th>
+											<th data-field="menuPrc">단가</th>
+											<th data-field="menuDesc">메뉴설명</th>
+											<th data-field="menuStockQty">메뉴재고</th>
+											<th data-field="menuDispYn">전시여부</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr class="tr-shadow" onclick='showPopup(1)'
 											data-toggle="modal" data-target="#largeModal">
 											<td>2</td>
-											<td>춘천 국물 닭갈비 떡뽁이</td>
+											<td>춘천 국물 닭갈비 떡볶이</td>
 											<td>2,000</td>
 											<td class="desc">닭갈비와 떡볶이의 오묘한 조화</td>
 											<td>100</td>
@@ -116,7 +115,6 @@
 			<!-- END DATA TABLE-->
 
 			<!-- modal large -->
-			<form name="frmCheck" method="post" onsubmit="return check()">
 				<div class="modal fade" id="largeModal" tabindex="-1" role="dialog"
 					aria-labelledby="largeModalLabel" aria-hidden="true">
 					<div class="modal-dialog modal-lg" role="document">
@@ -141,7 +139,7 @@
 										</div>
 										<div class="row form-group">
 											<div class="col col-md-3">
-												<label for="menuNm" class=" form-control-label">메뉴 명</label>
+												<label for="menuNm" class=" form-control-label">메뉴명</label>
 											</div>
 											<div class="col-12 col-md-9">
 												<input type="text" id="menuNm" name="menuNm"
@@ -209,13 +207,30 @@
 						</div>
 					</div>
 				</div>
-			</form>
 			<!-- end modal large -->
 
 			<%@ include file="/WEB-INF/jsp/admin/include/footer.jsp"%>
 		</div>
 </body>
-<script>
+<script type="text/javascript">
+
+var menuData=[];
+
+$(document).ready(function(){
+	$('#tblMenu').bootstrapTable({ // 부트스트랩(프론트엔드 프레임워크) 테이블(tblMenu) -> 바인딩 작업 자동 수행(위에 도큐먼트가 다 만들어 진 다음에 작업 진행)
+		data: menuData
+	});
+	$('#tblMenu').bootstrapTable('load', menuData);
+	
+	$('#tblMenu').delegate("tr", "click", function(){
+		var tr = $(this);
+		var td = tr.children();
+		var menuNo = td.eq(0).text();
+		alert(menuNo);
+	});
+});
+
+
 	$("#buttSave").click(function(){
 		event.preventDefault();
 		
@@ -263,7 +278,28 @@
 	}
 	
 	$("#btnSearch").click(function(){
-		alert("검색");
+		event.preventDefault();
+		
+		$.ajax({
+			url : '/admin/menu',
+			method : 'GET',
+			data : {
+				menuNo : $('#schMenuNo').val(),
+			    menuNm : $('#schMenuNm').val()
+			},
+			success : function(data){
+				if(data ===""){ //(공백(undefind)까지 같이 체크해줌 / '='보다 더 안전함)
+					alert("메뉴가 존재하지 않습니다.");
+				} else {
+					//메뉴가 있으면 테이블에 데이터 바인딩
+					menuData = data;
+				}
+			},
+			complete : function(data){
+				$('#tblMenu').bootstrapTable('load', menuData);
+				console.log(data);
+			}
+		});
 	});
 	
 /* 	 function check(){
