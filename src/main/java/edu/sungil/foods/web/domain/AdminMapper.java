@@ -13,4 +13,6 @@ public interface AdminMapper {
 
 	List<MenuInfo> selectMenuList(SchMenuInfo schMenuInfo);
 
+	void updateMenu(MenuInfo menuInfo);
+
 }

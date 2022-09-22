@@ -9,7 +9,7 @@
        		MENU_DESC,
        		MENU_STOCK_QTY, 
        		MENU_DISP_YN, 
-       		MANU_IMG_NM) values 
+       		MENU_IMG_NM) values 
        		(
        			#{menuNm},
        			#{menuPrc},
@@ -26,7 +26,8 @@
 	       	   MENU_PRC, 
 	       	   MENU_DESC,
 	       	   MENU_STOCK_QTY, 
-	       	   MENU_DISP_YN
+	       	   MENU_DISP_YN,
+	       	   MENU_IMG_NM AS FILE_NM
 	    FROM TB_MENU
 	    WHERE 1=1
 	    <if test="menuNo !='' and menuNo !=null">
@@ -37,4 +38,14 @@
 	    </if>
 	    
 	</select>
+	
+	<update id="updateMenu" parameterType="edu.sungil.foods.web.domain.dto.MenuInfo">
+		update TB_MENU
+			set MENU_NM = #{menuNm},
+				MENU_PRC = #{menuPrc},
+				MENU_DESC = #{menuDesc},
+				MENU_STOCK_QTY = #{menuStockQty},
+				MENU_DISP_YN = #{menuDispYn}
+			where MENU_NO = #{menuNo}
+	</update>
 </mapper> 

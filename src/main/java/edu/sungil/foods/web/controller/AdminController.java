@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,6 +55,15 @@ public class AdminController {
 		List<MenuInfo>	list = adminService.getMenuList(schMenuInfo);
 		return new ResponseEntity<List<MenuInfo>>(list, HttpStatus.OK);
 		// ResponseEntity에 데이터를 담아서 던져주면 나중에 요구사항이 들어왔을 때 프로그램을 전부 수정하지 않아도 됨
+	}
+	
+	@RequestMapping(value="/menu/{menuNo}",method=RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<MenuInfo> getMenu(
+			@PathVariable("menuNo") Long menuNo
+			){
+		MenuInfo	menuInfo = adminService.getMenu(menuNo);
+		return new ResponseEntity<MenuInfo>(menuInfo, HttpStatus.OK);
 	}
 	
 }
