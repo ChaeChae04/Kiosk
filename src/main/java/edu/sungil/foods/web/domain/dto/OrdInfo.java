@@ -8,6 +8,7 @@ public class OrdInfo {
 	private String ordDt;
 	private int menuNo;
 	private String menuNm;
+	private int menuPrc;
 	private int ordQty;
 	private int ordAmt;
 	private String ordStat;
