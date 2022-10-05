@@ -268,7 +268,7 @@ $(document).ready(function(){
 			url	: '/admin/menu/add',
 			data : paramData,
 			method : 'POST', // data 단순 조회 : get, data 수정/삭제 : post
-			enctype : 'multipar/from-data', //파일전송
+			enctype : 'multipart/from-data', //파일전송
 			contentType : false,
 			processData : false,
 			

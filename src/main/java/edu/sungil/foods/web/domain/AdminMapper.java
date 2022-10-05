@@ -21,4 +21,6 @@ public interface AdminMapper {
 
 	List<OrdInfo> selectOrdList(SchOrdInfo schOrdInfo);
 
+	void updateStatus(OrdInfo ordInfo);
+
 }

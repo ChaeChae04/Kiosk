@@ -163,6 +163,14 @@
 						tmpTr.find('.ordAmt').text(order.ordAmt);
 						tmpTr.find('.ordStat').text(order.ordStat);
 						
+						if(order.ordStat === "접수"){
+							tmpTr.find('.ordStat').addClass('status--denied')
+							tmpTr.find("button[name=btnCmp]").attr('onclick', 'ordCmp('+order.ordNo+')');
+						} else {
+							tmpTr.find('.ordStat').addClass('status--process')
+							tmpTr.find("button[name=btnCmp]").attr('disabled', 'disabled');
+						}
+						
 						$('#ordList').append(tmpTr);
 					});
 				}
@@ -172,5 +180,19 @@
 			}
 		});
 	});
+	
+	ordCmp = function(ordNo){
+		$.ajax({
+			url	: '/admin/status',
+			data : {ordNo : ordNo},
+			method : 'POST',
+			success : function(data){
+				alert("성공!!");
+			},
+			error : function(data){
+				alert("에러");
+			}
+		});
+	}
 </script>
 </html>

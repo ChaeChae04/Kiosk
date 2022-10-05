@@ -75,4 +75,9 @@ public class AdminService {
 	public List<OrdInfo> getOrdList(SchOrdInfo schOrdInfo) {
 		return adminMapper.selectOrdList(schOrdInfo);
 	}
+
+	public void updateStatus(OrdInfo ordInfo) {
+		adminMapper.updateStatus(ordInfo);
+		
+	}
 }
